@@ -10,7 +10,6 @@ import com.example.kelolarupiah.adapter.TransactionAdapter
 import com.example.kelolarupiah.data.AppDatabase
 import com.example.kelolarupiah.databinding.ActivityMainBinding
 import com.example.kelolarupiah.ui.report.LaporanActivity
-import com.example.kelolarupiah.ui.add.TambahTransaksiActivity
 import com.example.kelolarupiah.ui.update.UpdateTransaksiActivity
 
 class MainActivity : AppCompatActivity() {
