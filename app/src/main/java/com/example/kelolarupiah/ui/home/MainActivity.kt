@@ -9,8 +9,7 @@ import com.example.kelolarupiah.R
 import com.example.kelolarupiah.adapter.TransactionAdapter
 import com.example.kelolarupiah.data.AppDatabase
 import com.example.kelolarupiah.databinding.ActivityMainBinding
-import com.example.kelolarupiah.ui.FilterType
-import com.example.kelolarupiah.ui.LaporanActivity
+import com.example.kelolarupiah.ui.report.LaporanActivity
 import com.example.kelolarupiah.ui.add.TambahTransaksiActivity
 import com.example.kelolarupiah.ui.update.UpdateTransaksiActivity
 
@@ -50,19 +49,15 @@ class MainActivity : AppCompatActivity() {
             binding.rvTransactions.adapter = adapter
         }
 
-        // FAB
+        // FAB (Tetap digunakan untuk tambah transaksi)
         binding.fabAdd.setOnClickListener {
             startActivity(Intent(this, TambahTransaksiActivity::class.java))
         }
 
-        // Bottom nav
+        // Bottom nav tanpa navigation_add
         binding.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.navigation_home -> true
-                R.id.navigation_add -> {
-                    startActivity(Intent(this, TambahTransaksiActivity::class.java))
-                    true
-                }
+                R.id.navigation_home -> true // Tetap di halaman home
                 R.id.navigation_report -> {
                     startActivity(Intent(this, LaporanActivity::class.java))
                     true

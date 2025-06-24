@@ -2,16 +2,21 @@ package com.example.kelolarupiah.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import java.util.*
-import com.example.kelolarupiah.data.Transaction
 
 @Dao
 interface TransactionDao {
+
     @Query("SELECT * FROM transactions ORDER BY date DESC")
     fun getAll(): LiveData<List<Transaction>>
 
-    @Query("SELECT * FROM transactions WHERE date >= :start AND date <= :end ORDER BY date DESC")
-    fun getByDateRange(start: Date, end: Date): LiveData<List<Transaction>>
+    @Query("SELECT * FROM transactions WHERE date = date('now') ORDER BY date DESC")
+    fun getTransactionsDaily(): LiveData<List<Transaction>>
+
+    @Query("SELECT * FROM transactions WHERE strftime('%W', date) = strftime('%W', 'now') AND strftime('%Y', date) = strftime('%Y', 'now') ORDER BY date DESC")
+    fun getTransactionsWeekly(): LiveData<List<Transaction>>
+
+    @Query("SELECT * FROM transactions WHERE strftime('%m', date) = strftime('%m', 'now') AND strftime('%Y', date) = strftime('%Y', 'now') ORDER BY date DESC")
+    fun getTransactionsMonthly(): LiveData<List<Transaction>>
 
     @Insert
     suspend fun insert(transaction: Transaction)

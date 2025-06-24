@@ -8,6 +8,6 @@ data class Transaction(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val title: String,
     val amount: Long,
-    val date: Long,
+    val date: String, // format: "YYYY-MM-DD"
     val type: String // "INCOME" atau "EXPENSE"
 )
