@@ -63,6 +63,10 @@ dependencies {
     // Kotlin Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
 
+    implementation("com.github.PhilJay:MPAndroidChart:3.1.0")
+
+    implementation("com.google.android.material:material:1.11.0")
+
     // Compose (dari libs)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))

@@ -5,6 +5,8 @@ import com.example.kelolarupiah.data.Transaction
 import com.example.kelolarupiah.data.TransactionDao
 import kotlinx.coroutines.launch
 import java.util.*
+import androidx.lifecycle.map
+import androidx.lifecycle.switchMap
 
 enum class FilterType { BULANAN, MINGGUAN, HARIAN }
 
@@ -12,8 +14,11 @@ class HomeViewModel(private val dao: TransactionDao) : ViewModel() {
     private val filterType = MutableLiveData(FilterType.BULANAN)
 
     val filteredTransactions = filterType.switchMap { type ->
-        val (start, end) = getDateRange(type)
-        dao.getByDateRange(Date(start), Date(end)) // <-- perbaikan di sini
+        when (type) {
+            FilterType.BULANAN -> dao.getTransactionsMonthly()
+            FilterType.MINGGUAN -> dao.getTransactionsWeekly()
+            FilterType.HARIAN -> dao.getTransactionsDaily()
+        }
     }
 
     val income: LiveData<Long> = filteredTransactions.map { list ->

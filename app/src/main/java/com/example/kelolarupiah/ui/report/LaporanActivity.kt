@@ -1,4 +1,4 @@
-package com.example.kelolarupiah.ui
+package com.example.kelolarupiah.ui.report
 
 import android.graphics.Color
 import android.os.Bundle
@@ -11,7 +11,7 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class ReportActivity : AppCompatActivity() {
+class LaporanActivity : AppCompatActivity() {
 
     private lateinit var btnIncome: Button
     private lateinit var btnExpense: Button

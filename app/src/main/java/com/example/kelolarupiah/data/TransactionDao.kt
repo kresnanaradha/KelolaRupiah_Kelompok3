@@ -9,13 +9,26 @@ interface TransactionDao {
     @Query("SELECT * FROM transactions ORDER BY date DESC")
     fun getAll(): LiveData<List<Transaction>>
 
+    // Filter Harian
     @Query("SELECT * FROM transactions WHERE date = date('now') ORDER BY date DESC")
     fun getTransactionsDaily(): LiveData<List<Transaction>>
 
-    @Query("SELECT * FROM transactions WHERE strftime('%W', date) = strftime('%W', 'now') AND strftime('%Y', date) = strftime('%Y', 'now') ORDER BY date DESC")
+    // Filter Mingguan (memastikan date string compatible dengan strftime)
+    @Query("""
+        SELECT * FROM transactions
+        WHERE strftime('%W', date || ' 00:00:00') = strftime('%W', 'now')
+          AND strftime('%Y', date || ' 00:00:00') = strftime('%Y', 'now')
+        ORDER BY date DESC
+    """)
     fun getTransactionsWeekly(): LiveData<List<Transaction>>
 
-    @Query("SELECT * FROM transactions WHERE strftime('%m', date) = strftime('%m', 'now') AND strftime('%Y', date) = strftime('%Y', 'now') ORDER BY date DESC")
+    // Filter Bulanan (memastikan date string compatible dengan strftime)
+    @Query("""
+        SELECT * FROM transactions
+        WHERE strftime('%m', date || ' 00:00:00') = strftime('%m', 'now')
+          AND strftime('%Y', date || ' 00:00:00') = strftime('%Y', 'now')
+        ORDER BY date DESC
+    """)
     fun getTransactionsMonthly(): LiveData<List<Transaction>>
 
     @Insert

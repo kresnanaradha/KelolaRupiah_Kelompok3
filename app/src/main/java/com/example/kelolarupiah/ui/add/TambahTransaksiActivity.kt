@@ -75,17 +75,21 @@ class TambahTransaksiActivity : AppCompatActivity() {
             }
 
             val amount = amountStr.toLongOrNull() ?: 0
-            val date = try {
-                SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(dateStr)?.time ?: 0L
+
+            // Format date: dari dd/MM/yyyy (input user) ke yyyy-MM-dd (untuk DB)
+            val formattedDate = try {
+                val inputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val dateObj = inputFormat.parse(dateStr)
+                outputFormat.format(dateObj!!)
             } catch (e: Exception) {
-                0L
+                ""
             }
 
-            // Gunakan AppDatabase singleton
             val transaction = Transaction(
                 title = title,
                 amount = amount,
-                date = date,
+                date = formattedDate, // <-- format sudah benar!
                 type = type
             )
 
