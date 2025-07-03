@@ -13,7 +13,7 @@ interface TransactionDao {
     @Query("SELECT * FROM transactions WHERE date = date('now') ORDER BY date DESC")
     fun getTransactionsDaily(): LiveData<List<Transaction>>
 
-    // Filter Mingguan (memastikan date string compatible dengan strftime)
+    // Filter Mingguan
     @Query("""
         SELECT * FROM transactions
         WHERE strftime('%W', date || ' 00:00:00') = strftime('%W', 'now')
@@ -22,7 +22,7 @@ interface TransactionDao {
     """)
     fun getTransactionsWeekly(): LiveData<List<Transaction>>
 
-    // Filter Bulanan (memastikan date string compatible dengan strftime)
+    // Filter Bulanan
     @Query("""
         SELECT * FROM transactions
         WHERE strftime('%m', date || ' 00:00:00') = strftime('%m', 'now')
@@ -31,8 +31,13 @@ interface TransactionDao {
     """)
     fun getTransactionsMonthly(): LiveData<List<Transaction>>
 
+    // Ambil transaksi berdasarkan ID
+    @Query("SELECT * FROM transactions WHERE id = :id LIMIT 1")
+    suspend fun getTransactionById(id: Long): Transaction?
+
+    // Perbaikan: insert harus mengembalikan Long agar dapat ID transaksi
     @Insert
-    suspend fun insert(transaction: Transaction)
+    suspend fun insert(transaction: Transaction): Long
 
     @Update
     suspend fun update(transaction: Transaction)

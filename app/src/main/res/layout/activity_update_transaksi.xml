@@ -1,18 +1,229 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
-    android:orientation="vertical"
-    android:gravity="center"
     android:background="@android:color/white">
 
-    <TextView
-        android:id="@+id/tvUpdateInfo"
-        android:layout_width="wrap_content"
+    <!-- Header Ungu -->
+    <RelativeLayout
+        android:id="@+id/header_purple"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:background="#8000FF">
+
+        <!-- Tombol Back -->
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="16dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_arrow_back"
+            android:tint="@android:color/white"
+            android:contentDescription="Kembali" />
+
+        <!-- Judul Header -->
+        <TextView
+            android:id="@+id/tv_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Transaksi"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="46dp" />
+    </RelativeLayout>
+
+    <!-- Card Form -->
+    <LinearLayout
+        android:id="@+id/card_form"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Halaman Update"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black" />
-</LinearLayout>
+        android:layout_marginTop="130dp"
+        android:background="@drawable/bg_card_white_top_rounded"
+        android:elevation="7dp"
+        android:orientation="vertical"
+        android:paddingTop="12dp"
+        android:paddingBottom="24dp">
+
+        <!-- Drag Handle -->
+        <View
+            android:layout_width="40dp"
+            android:layout_height="5dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_drag_handle" />
+
+        <!-- Tabs (DISABLE jika hanya untuk pemasukan) -->
+        <LinearLayout
+            android:id="@+id/tab_selector"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginHorizontal="24dp"
+            android:background="@drawable/bg_tab_container"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="4dp"
+            android:visibility="gone"> <!-- GONE agar tidak muncul -->
+
+            <Button
+                android:id="@+id/btn_income"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_tab_selected"
+                android:text="Pemasukan"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btn_expense"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:text="Pengeluaran"
+                android:textAllCaps="false"
+                android:textColor="#A020F0"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- Nama Transaksi -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:text="Nama Transaksi"
+            android:textColor="#888"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/et_title"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="24dp"
+            android:background="@drawable/bg_edittext"
+            android:hint="Nama Transaksi"
+            android:paddingHorizontal="12dp"
+            android:textColor="#222"
+            android:textColorHint="#bbb"
+            android:textSize="13sp" />
+
+        <!-- Kategori -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:text="Kategori"
+            android:textColor="#888"
+            android:textSize="13sp" />
+
+        <Spinner
+            android:id="@+id/sp_category"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="24dp"
+            android:background="@drawable/bg_edittext"
+            android:paddingHorizontal="8dp" />
+
+        <!-- Jumlah -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:text="Jumlah"
+            android:textColor="#888"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/et_amount"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="24dp"
+            android:background="@drawable/bg_edittext"
+            android:hint="RP.XXX.XXX"
+            android:inputType="number"
+            android:paddingHorizontal="12dp"
+            android:textColor="#222"
+            android:textColorHint="#bbb"
+            android:textSize="13sp" />
+
+        <!-- Tanggal Transaksi -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:text="Tanggal Transaksi"
+            android:textColor="#888"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/et_date"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="24dp"
+            android:background="@drawable/bg_edittext"
+            android:focusable="false"
+            android:hint="HH/MM/YYYY"
+            android:paddingHorizontal="12dp"
+            android:textColor="#222"
+            android:textColorHint="#bbb"
+            android:textSize="13sp" />
+
+        <!-- Catatan -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:text="Catatan"
+            android:textColor="#888"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/et_note"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="24dp"
+            android:background="@drawable/bg_edittext"
+            android:hint="Optional"
+            android:paddingHorizontal="12dp"
+            android:textColor="#222"
+            android:textColorHint="#bbb"
+            android:textSize="13sp" />
+
+        <!-- Tombol Simpan -->
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_button_gradient"
+            android:text="Simpan Perubahan"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/holo_red_dark"
+            android:text="Hapus Transaksi"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+</RelativeLayout>
