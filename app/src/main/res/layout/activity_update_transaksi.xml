@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
@@ -20,7 +21,7 @@
             android:layout_marginStart="16dp"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_arrow_back"
-            android:tint="@android:color/white"
+            app:tint="@android:color/white"
             android:contentDescription="Kembali" />
 
         <!-- Judul Header -->
@@ -57,17 +58,16 @@
             android:layout_marginBottom="12dp"
             android:background="@drawable/bg_drag_handle" />
 
-        <!-- Tabs (DISABLE jika hanya untuk pemasukan) -->
+        <!-- Tabs -->
         <LinearLayout
-            android:id="@+id/tab_selector"
             android:layout_width="match_parent"
             android:layout_height="44dp"
-            android:layout_marginHorizontal="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
             android:background="@drawable/bg_tab_container"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="4dp"
-            android:visibility="gone"> <!-- GONE agar tidak muncul -->
+            android:padding="4dp">
 
             <Button
                 android:id="@+id/btn_income"
@@ -106,7 +106,8 @@
             android:id="@+id/et_title"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginHorizontal="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
             android:background="@drawable/bg_edittext"
             android:hint="Nama Transaksi"
             android:paddingHorizontal="12dp"
@@ -114,7 +115,6 @@
             android:textColorHint="#bbb"
             android:textSize="13sp" />
 
-        <!-- Kategori -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -124,13 +124,21 @@
             android:textColor="#888"
             android:textSize="13sp" />
 
-        <Spinner
-            android:id="@+id/sp_category"
+        <EditText
+            android:id="@+id/et_category"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginHorizontal="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
             android:background="@drawable/bg_edittext"
-            android:paddingHorizontal="8dp" />
+            android:hint="Pilih Kategori"
+            android:focusable="false"
+            android:clickable="true"
+            android:paddingHorizontal="12dp"
+            android:textColor="#222"
+            android:textColorHint="#bbb"
+            android:textSize="13sp" />
+
 
         <!-- Jumlah -->
         <TextView
@@ -146,7 +154,8 @@
             android:id="@+id/et_amount"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginHorizontal="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
             android:background="@drawable/bg_edittext"
             android:hint="RP.XXX.XXX"
             android:inputType="number"
@@ -169,7 +178,8 @@
             android:id="@+id/et_date"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginHorizontal="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
             android:background="@drawable/bg_edittext"
             android:focusable="false"
             android:hint="HH/MM/YYYY"
@@ -192,7 +202,8 @@
             android:id="@+id/et_note"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginHorizontal="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
             android:background="@drawable/bg_edittext"
             android:hint="Optional"
             android:paddingHorizontal="12dp"
@@ -205,7 +216,8 @@
             android:id="@+id/btn_save"
             android:layout_width="match_parent"
             android:layout_height="58dp"
-            android:layout_marginHorizontal="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/bg_button_gradient"
             android:text="Simpan Perubahan"
@@ -213,11 +225,13 @@
             android:textColor="@android:color/white"
             android:textSize="15sp" />
 
+        <!-- Tombol Hapus -->
         <Button
             android:id="@+id/btn_delete"
             android:layout_width="match_parent"
             android:layout_height="58dp"
-            android:layout_marginHorizontal="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
             android:layout_marginTop="8dp"
             android:background="@android:color/holo_red_dark"
             android:text="Hapus Transaksi"

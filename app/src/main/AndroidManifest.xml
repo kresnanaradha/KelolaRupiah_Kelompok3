@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.kelolarupiah">
 
     <application
         android:allowBackup="true"
@@ -12,6 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KelolaRupiah"
         tools:targetApi="31">
+
+        <!-- Splash Screen Activity -->
         <activity
             android:name="com.example.kelolarupiah.ui.splash.SplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
@@ -21,9 +24,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.home.MainActivity" />
-        <activity android:name=".ui.add.TambahTransaksiActivity" />
-        <activity android:name=".ui.update.UpdateTransaksiActivity" />
-        <activity android:name=".ui.report.LaporanActivity" />
+
+        <!-- Main Activity -->
+        <activity android:name=".ui.home.MainActivity"
+            android:exported="true" /> <!-- Tambahkan android:exported="true" -->
+
+        <!-- Tambah Transaksi Activity -->
+        <activity android:name=".ui.add.TambahTransaksiActivity"
+            android:exported="true" /> <!-- Tambahkan android:exported="true" -->
+
+        <!-- Update Transaksi Activity -->
+        <activity android:name=".ui.update.UpdateTransaksiActivity"
+            android:exported="true" /> <!-- Tambahkan android:exported="true" -->
+
+        <!-- Laporan Activity -->
+        <activity android:name=".ui.report.LaporanActivity"
+            android:exported="true" /> <!-- Tambahkan android:exported="true" -->
+
+        <!-- Category Activity -->
+        <activity android:name=".ui.kategori.CategoryActivity"
+            android:exported="true" /> <!-- Tambahkan android:exported="true" -->
+
     </application>
+
 </manifest>

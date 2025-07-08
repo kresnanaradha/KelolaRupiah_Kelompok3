@@ -35,13 +35,19 @@ interface TransactionDao {
     @Query("SELECT * FROM transactions WHERE id = :id LIMIT 1")
     suspend fun getTransactionById(id: Long): Transaction?
 
-    // Perbaikan: insert harus mengembalikan Long agar dapat ID transaksi
+    // Ambil transaksi berdasarkan kategori
+    @Query("SELECT * FROM transactions WHERE category = :category ORDER BY date DESC")
+    fun getTransactionsByCategory(category: String): LiveData<List<Transaction>>
+
+    // Insert transaksi dan kembalikan ID transaksi yang baru dimasukkan
     @Insert
     suspend fun insert(transaction: Transaction): Long
 
+    // Update transaksi
     @Update
     suspend fun update(transaction: Transaction)
 
+    // Hapus transaksi
     @Delete
     suspend fun delete(transaction: Transaction)
 }

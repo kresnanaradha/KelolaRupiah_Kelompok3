@@ -5,6 +5,8 @@
     android:background="@android:color/white">
 
     <!-- Header Ungu -->
+
+    <!-- Card Form -->
     <RelativeLayout
         android:id="@+id/header_purple"
         android:layout_width="match_parent"
@@ -16,27 +18,26 @@
             android:id="@+id/btn_back"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:layout_marginTop="40dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
             android:background="@android:color/transparent"
+            android:contentDescription="Kembali"
             android:src="@drawable/ic_arrow_back"
-            android:tint="@android:color/white"
-            android:contentDescription="Kembali" />
+            android:tint="@android:color/white" />
 
         <!-- Judul Header -->
         <TextView
             android:id="@+id/tv_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="46dp"
             android:text="Tambah Transaksi"
             android:textColor="@android:color/white"
-            android:textStyle="bold"
             android:textSize="18sp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="46dp" />
+            android:textStyle="bold" />
     </RelativeLayout>
 
-    <!-- Card Form -->
     <LinearLayout
         android:id="@+id/card_form"
         android:layout_width="match_parent"
@@ -122,13 +123,19 @@
             android:textColor="#888"
             android:textSize="13sp" />
 
-        <Spinner
-            android:id="@+id/sp_category"
+        <EditText
+            android:id="@+id/et_category"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginHorizontal="24dp"
             android:background="@drawable/bg_edittext"
-            android:paddingHorizontal="8dp" />
+            android:hint="Pilih Kategori"
+            android:focusable="false"
+            android:clickable="true"
+            android:paddingHorizontal="12dp"
+            android:textColor="#222"
+            android:textColorHint="#bbb"
+            android:textSize="13sp" />
 
         <!-- Jumlah -->
         <TextView

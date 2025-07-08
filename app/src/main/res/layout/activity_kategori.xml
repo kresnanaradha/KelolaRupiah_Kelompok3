@@ -1,231 +1,306 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#8000FF">
+    android:background="#F5F5F5">
 
-    <!-- Header Ungu -->
-    <LinearLayout
+    <!-- Header -->
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:padding="16dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:background="#8000FF"
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
 
-        <ImageView
-            android:id="@+id/backButton"
+        <!-- Tombol Back -->
+        <ImageButton
+            android:id="@+id/btn_back"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:background="@drawable/bg_circle_white"
-            android:padding="6dp"
-            android:src="@drawable/ic_arrow_back_black"
-            android:contentDescription="Back"
-            android:clickable="true"
-            android:focusable="true" />
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="Kembali"
+            android:src="@drawable/ic_arrow_back"
+            android:tint="@android:color/white" />
 
+        <!-- Judul Header -->
         <TextView
+            android:id="@+id/headerTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:text="Tambah Transaksi"
-            android:textColor="#FFFFFF"
+            android:layout_centerHorizontal="true"
+            android:text="Pilih Kategori"
+            android:textColor="@android:color/white"
             android:textSize="20sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:textStyle="bold"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
 
-    <!-- Container Putih -->
+    <!-- List of Categories -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-24dp"
-        android:layout_weight="1"
-        android:background="@android:color/white"
-        android:clipToPadding="false"
-        android:elevation="4dp"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
+        android:showDividers="middle"
+        android:paddingTop="16dp">
 
-        <!-- Handle -->
-        <View
-            android:layout_width="60dp"
-            android:layout_height="6dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="-16dp"
-            android:layout_marginBottom="16dp"
-            android:background="#CCCCCC"
-            android:backgroundTint="#BBBBBB" />
-
-        <!-- Tombol Tambah -->
+        <!-- Category: Air -->
         <LinearLayout
+            android:id="@+id/category_air"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:paddingBottom="16dp">
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:gravity="center_vertical"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
 
             <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:background="@drawable/bg_circle_white"
-                android:elevation="4dp"
-                android:padding="6dp"
-                android:src="@drawable/ic_add"
-                android:tint="#8000FF" />
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_air"
+                android:tint="#8000FF"
+                android:background="@drawable/bg_circle_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Air"
+                android:textColor="#000000"
+                android:textSize="16sp" />
         </LinearLayout>
 
-        <!-- Daftar Kategori -->
+        <!-- Category: Belanja -->
         <LinearLayout
+            android:id="@+id/category_belanja"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@android:color/darker_gray"
-            android:dividerHeight="1dp"
-            android:orientation="vertical"
-            android:showDividers="middle">
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:gravity="center_vertical"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
 
-            <!-- Kategori: Air -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_belanja"
+                android:tint="#8000FF"
+                android:background="@drawable/bg_circle_white" />
 
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:src="@drawable/ic_air"
-                    android:tint="#8000FF" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Air"
-                    android:textColor="#000000"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <!-- Kategori: Belanja -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp">
-
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:src="@drawable/ic_belanja"
-                    android:tint="#8000FF" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Belanja"
-                    android:textColor="#000000"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <!-- Kategori: Bensin -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp">
-
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:src="@drawable/ic_bensin"
-                    android:tint="#8000FF" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Bensin"
-                    android:textColor="#000000"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <!-- Kategori: Bus -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp">
-
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:src="@drawable/ic_bus"
-                    android:tint="#8000FF" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Bus"
-                    android:textColor="#000000"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <!-- Kategori: Elektronik -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp">
-
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:src="@drawable/ic_elektronik"
-                    android:tint="#8000FF" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Elektronik"
-                    android:textColor="#000000"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <!-- Kategori: Makanan -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp">
-
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:src="@drawable/ic_makanan"
-                    android:tint="#8000FF" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Makanan"
-                    android:textColor="#000000"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Belanja"
+                android:textColor="#000000"
+                android:textSize="16sp" />
         </LinearLayout>
+
+        <!-- Category: Bensin -->
+        <LinearLayout
+            android:id="@+id/category_bensin"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:gravity="center_vertical"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_bensin"
+                android:tint="#8000FF"
+                android:background="@drawable/bg_circle_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Bensin"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Category: Bus -->
+        <LinearLayout
+            android:id="@+id/category_bus"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:gravity="center_vertical"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_bus"
+                android:tint="#8000FF"
+                android:background="@drawable/bg_circle_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Bus"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Category: Elektronik -->
+        <LinearLayout
+            android:id="@+id/category_elektronik"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:gravity="center_vertical"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_elektronik"
+                android:tint="#8000FF"
+                android:background="@drawable/bg_circle_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Elektronik"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Category: Makanan -->
+        <LinearLayout
+            android:id="@+id/category_makanan"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:gravity="center_vertical"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_makanan"
+                android:tint="#8000FF"
+                android:background="@drawable/bg_circle_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Makanan"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Category: Gaji -->
+        <LinearLayout
+            android:id="@+id/category_gaji"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:gravity="center_vertical"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_gaji"
+                android:tint="#8000FF"
+                android:background="@drawable/bg_circle_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Gaji"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Category: Bonus -->
+        <LinearLayout
+            android:id="@+id/category_bonus"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:gravity="center_vertical"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_bonus"
+                android:tint="#8000FF"
+                android:background="@drawable/bg_circle_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Bonus"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Category: Komisi -->
+        <LinearLayout
+            android:id="@+id/category_komisi"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:gravity="center_vertical"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_komisi"
+                android:tint="#8000FF"
+                android:background="@drawable/bg_circle_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Komisi"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+
     </LinearLayout>
+
 </LinearLayout>

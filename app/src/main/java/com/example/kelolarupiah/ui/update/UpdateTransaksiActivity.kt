@@ -1,6 +1,5 @@
 package com.example.kelolarupiah.ui.update
 
-import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.*
@@ -10,21 +9,25 @@ import com.example.kelolarupiah.R
 import com.example.kelolarupiah.data.AppDatabase
 import com.example.kelolarupiah.data.Transaction
 import com.example.kelolarupiah.ui.home.MainActivity
+import com.example.kelolarupiah.ui.kategori.CategoryActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.*
 
 class UpdateTransaksiActivity : AppCompatActivity() {
+
+    private var isIncome = true  // Default jenis transaksi adalah INCOME
 
     private lateinit var etTitle: EditText
     private lateinit var etAmount: EditText
     private lateinit var etDate: EditText
     private lateinit var etNote: EditText
-    private lateinit var spType: Spinner
+    private lateinit var etCategory: EditText // EditText untuk kategori
     private lateinit var btnSave: Button
     private lateinit var btnDelete: Button
     private lateinit var btnBack: ImageButton
+    private lateinit var btnIncome: Button  // Tombol untuk INCOME
+    private lateinit var btnExpense: Button  // Tombol untuk EXPENSE
 
     private var transactionId: Long = -1L
     private lateinit var database: AppDatabase
@@ -38,30 +41,39 @@ class UpdateTransaksiActivity : AppCompatActivity() {
         etAmount = findViewById(R.id.et_amount)
         etDate = findViewById(R.id.et_date)
         etNote = findViewById(R.id.et_note)
-        spType = findViewById(R.id.sp_category)
+        etCategory = findViewById(R.id.et_category) // EditText untuk kategori
         btnSave = findViewById(R.id.btn_save)
         btnDelete = findViewById(R.id.btn_delete)
         btnBack = findViewById(R.id.btn_back)
+        btnIncome = findViewById(R.id.btn_income)
+        btnExpense = findViewById(R.id.btn_expense)
 
-        setupTypeSpinner()
+        // Kategori dipilih melalui Activity lain
+        etCategory.setOnClickListener {
+            val intent = Intent(this, CategoryActivity::class.java)
+            startActivityForResult(intent, REQUEST_CODE_CATEGORY)  // Membuka CategoryActivity untuk memilih kategori
+        }
 
-        etDate.setOnClickListener {
-            val calendar = Calendar.getInstance()
-            DatePickerDialog(
-                this,
-                { _, year, month, dayOfMonth ->
-                    val selectedDate = String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth)
-                    etDate.setText(selectedDate)
-                },
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-            ).show()
+        // Logika Tabs (Pemasukan / Pengeluaran)
+        btnIncome.setOnClickListener {
+            isIncome = true
+            btnIncome.background = getDrawable(R.drawable.bg_tab_selected)
+            btnIncome.setTextColor(resources.getColor(android.R.color.white))
+            btnExpense.background = null
+            btnExpense.setTextColor(resources.getColor(R.color.purple_700))
+        }
+
+        btnExpense.setOnClickListener {
+            isIncome = false
+            btnExpense.background = getDrawable(R.drawable.bg_tab_selected)
+            btnExpense.setTextColor(resources.getColor(android.R.color.white))
+            btnIncome.background = null
+            btnIncome.setTextColor(resources.getColor(R.color.purple_700))
         }
 
         database = AppDatabase.getInstance(this)
 
-        // FIXED: Pastikan key sesuai dengan yang dikirim dari MainActivity
+        // Memastikan key yang dikirim dari MainActivity
         transactionId = intent.getLongExtra("trx_id", -1L)
 
         if (transactionId != -1L) {
@@ -87,13 +99,6 @@ class UpdateTransaksiActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupTypeSpinner() {
-        val types = arrayOf("INCOME", "EXPENSE")
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, types)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spType.adapter = adapter
-    }
-
     private fun loadTransaction(id: Long) {
         lifecycleScope.launch {
             val transaction = withContext(Dispatchers.IO) {
@@ -105,8 +110,21 @@ class UpdateTransaksiActivity : AppCompatActivity() {
                 etAmount.setText(it.amount.toString())
                 etDate.setText(it.date)
                 etNote.setText(it.note ?: "")
-                val position = (spType.adapter as ArrayAdapter<String>).getPosition(it.type)
-                spType.setSelection(position)
+                etCategory.setText(it.category ?: "") // Menampilkan kategori yang dipilih sebelumnya
+                // Set the appropriate type for INCOME or EXPENSE
+                if (it.type == "INCOME") {
+                    isIncome = true
+                    btnIncome.background = getDrawable(R.drawable.bg_tab_selected)
+                    btnIncome.setTextColor(resources.getColor(android.R.color.white))
+                    btnExpense.background = null
+                    btnExpense.setTextColor(resources.getColor(R.color.purple_700))
+                } else {
+                    isIncome = false
+                    btnExpense.background = getDrawable(R.drawable.bg_tab_selected)
+                    btnExpense.setTextColor(resources.getColor(android.R.color.white))
+                    btnIncome.background = null
+                    btnIncome.setTextColor(resources.getColor(R.color.purple_700))
+                }
             } ?: run {
                 Toast.makeText(this@UpdateTransaksiActivity, "Data transaksi tidak ditemukan", Toast.LENGTH_SHORT).show()
                 finish()
@@ -119,9 +137,10 @@ class UpdateTransaksiActivity : AppCompatActivity() {
         val amount = etAmount.text.toString().toLongOrNull()
         val date = etDate.text.toString().trim()
         val note = etNote.text.toString().trim()
-        val type = spType.selectedItem.toString()
+        val category = etCategory.text.toString().trim()
+        val type = if (isIncome) "INCOME" else "EXPENSE"
 
-        if (title.isEmpty() || amount == null || date.isEmpty()) {
+        if (title.isEmpty() || amount == null || date.isEmpty() || category.isEmpty()) {
             Toast.makeText(this, "Harap isi semua data!", Toast.LENGTH_SHORT).show()
             return
         }
@@ -132,8 +151,9 @@ class UpdateTransaksiActivity : AppCompatActivity() {
                 title = title,
                 amount = amount,
                 date = date,
-                type = type,
-                note = if (note.isEmpty()) null else note
+                type = type, // Pemasukan atau Pengeluaran
+                note = if (note.isEmpty()) null else note,
+                category = category // Menyimpan kategori yang dipilih
             )
 
             withContext(Dispatchers.IO) {
@@ -157,5 +177,18 @@ class UpdateTransaksiActivity : AppCompatActivity() {
             Toast.makeText(this@UpdateTransaksiActivity, "Transaksi berhasil dihapus", Toast.LENGTH_SHORT).show()
             finish()
         }
+    }
+
+    // Menangani hasil dari CategoryActivity
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_CATEGORY && resultCode == RESULT_OK) {
+            val selectedCategory = data?.getStringExtra("selectedCategory")
+            etCategory.setText(selectedCategory)  // Menampilkan kategori yang dipilih ke EditText
+        }
+    }
+
+    companion object {
+        private const val REQUEST_CODE_CATEGORY = 1001  // Kode permintaan untuk CategoryActivity
     }
 }

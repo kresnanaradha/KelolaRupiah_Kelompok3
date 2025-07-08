@@ -4,12 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-// Hapus baris ini jika kamu tidak pakai converter
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.room.TypeConverters
 
-// GANTI VERSI jika kamu ubah struktur entitas
-@Database(entities = [Transaction::class], version = 2, exportSchema = false)
-// Hapus @TypeConverters jika tidak pakai
+@Database(entities = [Transaction::class], version = 3, exportSchema = false) // Update version ke 3
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
@@ -19,6 +18,13 @@ abstract class AppDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
+        val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                // Menambahkan kolom 'category' pada tabel 'transactions'
+                database.execSQL("ALTER TABLE transactions ADD COLUMN category TEXT")
+            }
+        }
+
         fun getInstance(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
                 INSTANCE ?: Room.databaseBuilder(
@@ -26,7 +32,8 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "kelolarupiah.db"
                 )
-                    .fallbackToDestructiveMigration() // akan hapus data lama jika versi meningkat
+                    .addMigrations(MIGRATION_1_2)  // Menambahkan migrasi
+                    .fallbackToDestructiveMigration()  // Opsional: jika migrasi gagal, hapus data lama
                     .build()
                     .also { INSTANCE = it }
             }
