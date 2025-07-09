@@ -3,6 +3,7 @@ package com.example.kelolarupiah.data
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
+
 @Dao
 interface TransactionDao {
 
@@ -38,6 +39,13 @@ interface TransactionDao {
     // Ambil transaksi berdasarkan kategori
     @Query("SELECT * FROM transactions WHERE category = :category ORDER BY date DESC")
     fun getTransactionsByCategory(category: String): LiveData<List<Transaction>>
+
+    @Query("SELECT SUM(amount) FROM transactions WHERE type = :type")
+    suspend fun getTotalByType(type: String): Long? // Mengembalikan Long? yang bisa null
+
+    // Mendapatkan ringkasan kategori berdasarkan tipe (INCOME atau EXPENSE)
+    @Query("SELECT category, SUM(amount) AS totalAmount FROM transactions WHERE type = :type GROUP BY category")
+    suspend fun getCategorySummary(type: String): List<CategorySummary>
 
     // Insert transaksi dan kembalikan ID transaksi yang baru dimasukkan
     @Insert

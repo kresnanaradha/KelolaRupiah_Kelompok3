@@ -8,7 +8,7 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.room.TypeConverters
 
-@Database(entities = [Transaction::class], version = 3, exportSchema = false) // Update version ke 3
+@Database(entities = [Transaction::class], version = 2, exportSchema = false) // Update version ke 3
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
