@@ -1,4 +1,4 @@
-#Kelola Rupiah
+Kelola Rupiah💸
 ==
 KelolaRupiah merupakan aplikasi untuk mengatur keuangan anda
 --
